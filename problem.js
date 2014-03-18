@@ -42,6 +42,14 @@ function twice(binary) {
   }
 }
 
+function composeu(u1, u2) {
+  return function(x) {
+    return u2(u1(x));
+  }
+}
+
+
+var double = twice(add);
 var square = twice(mul);
 
-alert(square(11));
+alert(composeu(double, square)(3));
