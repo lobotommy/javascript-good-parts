@@ -24,12 +24,11 @@ var mul = function(a, b) {
   return Number(a) * Number(b);
 }
 
-var inc1 = curry(add, 1);
-//alert(inc1(5));
+var methodize = function(binary) {
+  return function(y) {
+    return binary(this, y);    
+  }
+}
 
-var inc2 = applyf(add)(1);
-//alert(inc2(5));
-
-var inc3 = addf(1);
-var result = inc3(5);
-alert(result);
+Number.prototype.add = methodize(add);
+alert((3).add(4));
