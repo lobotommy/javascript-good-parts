@@ -48,8 +48,15 @@ function composeu(u1, u2) {
   }
 }
 
-
 var double = twice(add);
 var square = twice(mul);
 
-alert(composeu(double, square)(3));
+
+function composeb(b1, b2) {
+  return function(x, y, z) {
+    return b2(b1(x,y), z);
+  }
+}
+
+
+alert(composeb(add, mul)(2, 3, 5));
