@@ -4,6 +4,12 @@ var identity = function(id) {
   }
 }
 
+var addf = function(a) {
+  return function(b) {
+    return a + b;
+  }
+}
+
 var add = function(a, b) {
   return Number(a) + Number(b);
 }
@@ -12,6 +18,4 @@ var mul = function(a, b) {
   return Number(a) * Number(b);
 }
 
-var idf = identity(3);
-
-alert(idf());
+alert(addf(3)(4));
