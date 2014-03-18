@@ -66,12 +66,19 @@ function once(func) {
   };
 }
 
-var add_once = once(add);
-add_once(3,4);
-try {
-  add_once(3,4);
-  alert('did not fail, which is wrong');
+function counterf(counter) {
+
+  return {
+    inc : function() {
+      return counter = counter + 1;
+    },
+    dec : function() {
+      return counter = counter - 1;
+    }
+  };
 }
-catch(e) {
-  alert('failed as expected');
-}
+
+var counter = counterf(10);
+
+alert(counter.inc());
+alert(counter.dec());
