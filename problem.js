@@ -1,15 +1,17 @@
 var identity = function(id) {
-  return 3;
+  return function() {
+    return id;
+  }
 }
 
 var add = function(a, b) {
-  return a + b;
+  return Number(a) + Number(b);
 }
 
 var mul = function(a, b) {
-  return a * b;
+  return Number(a) * Number(b);
 }
 
-//alert(identity(3));
-//alert(add(3, 4));
-//alert(mul(3, 4));
+var idf = identity(3);
+
+alert(idf());
