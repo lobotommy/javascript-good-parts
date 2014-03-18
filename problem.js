@@ -36,7 +36,12 @@ var demethodize = function(method) {
   }
 }
 
-Number.prototype.add = methodize(add);
-var addfunc = demethodize(Number.prototype.add);
+function twice(binary) {
+  return function(x) {
+    return binary(x,x);
+  }
+}
 
-alert(addfunc(3,4));
+var square = twice(mul);
+
+alert(square(11));
