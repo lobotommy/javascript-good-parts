@@ -58,5 +58,20 @@ function composeb(b1, b2) {
   }
 }
 
+function once(func) {
+  return function() {
+    var f = func;
+    func = null;
+    return f.apply(this, arguments);
+  };
+}
 
-alert(composeb(add, mul)(2, 3, 5));
+var add_once = once(add);
+add_once(3,4);
+try {
+  add_once(3,4);
+  alert('did not fail, which is wrong');
+}
+catch(e) {
+  alert('failed as expected');
+}
