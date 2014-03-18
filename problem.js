@@ -1,12 +1,8 @@
-var identity = function(id) {
-  return function() {
-    return id;
-  }
-}
-
-var addf = function(a) {
-  return function(b) {
-    return a + b;
+var applyf = function(binary) {
+  return function(a) {
+    return function(b) {
+        return binary(a, b);
+    }
   }
 }
 
@@ -18,4 +14,7 @@ var mul = function(a, b) {
   return Number(a) * Number(b);
 }
 
-alert(addf(3)(4));
+var addf = applyf(add);
+
+//alert(addf(3)(4));
+alert(applyf(mul)(5)(6));
