@@ -7,9 +7,7 @@ var applyf = function(binary) {
 }
 
 var curry = function(binary, first) {
-  return function(second) {
-    return binary(first, second);
-  }
+  return applyf(binary)(first);
 }
 
 var add = function(a, b) {
