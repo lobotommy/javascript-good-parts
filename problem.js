@@ -26,9 +26,17 @@ var mul = function(a, b) {
 
 var methodize = function(binary) {
   return function(y) {
-    return binary(this, y);    
+    return binary(this, y);
+  }
+}
+
+var demethodize = function(method) {
+  return function(that, y){
+    return method.call(that, y);
   }
 }
 
 Number.prototype.add = methodize(add);
-alert((3).add(4));
+var addfunc = demethodize(Number.prototype.add);
+
+alert(addfunc(3,4));
