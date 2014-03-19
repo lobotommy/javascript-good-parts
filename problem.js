@@ -66,6 +66,28 @@ function once(func) {
   };
 }
 
+function revocable(func) {
+  return {
+    invoke : function() { return func.apply(this, arguments); },
+    revoke : function() { func = null; }
+  };
+}
+
+function revocableNoChrome(func) {
+  return {
+    invoke: function() {
+      return func.apply(
+        this,
+        arguments
+      );
+    },
+    revoke: function() {
+      func = null;
+    }
+  };
+}
+
+
 function counterf(counter) {
 
   return {
@@ -78,7 +100,7 @@ function counterf(counter) {
   };
 }
 
-var counter = counterf(10);
-
-alert(counter.inc());
-alert(counter.dec());
+var temp = revocable(alert);
+temp.invoke(7);
+temp.revoke();
+temp.invoke(8);
