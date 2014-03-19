@@ -1,4 +1,4 @@
-function MONAD() {
+function MONAD(modifier) {
   var prototype = Object.create(null);
   function unit(value) {
     var monad = Object.create(prototype);
@@ -8,6 +8,10 @@ function MONAD() {
         [value].concat(Array.prototype.slice.apply(args || []))
       );
     };
+
+    if(typeof(modifier) === 'function'){
+      modifier(monad, value);
+    }
 
     return monad;
   }
@@ -23,6 +27,16 @@ function MONAD() {
   return unit;
 }
 
-var unit = MONAD().lift('alert', alert);
-var monad = unit("Hello World");
-monad.alert();
+
+var maybe = MONAD(function (monad, value) {
+  if(value === null || value === undefined) {
+    monad.is_null = true;
+    monad.bind = function() {
+      return monad;
+    };
+  }
+});
+
+
+var monad = maybe(null);
+monad.bind(alert);
